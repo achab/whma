@@ -3,11 +3,17 @@ from numpy.linalg import eigh
 from whma.updates import *
 
 #@autojit
-def admm(cumul, prox_fun, X1_0, X4_0, alpha_truth, rho=0.1, alpha=0.99, maxiter=100, positivity=True):
+def admm(cumul, prox_fun, X1_0=None, X4_0=None, rho=0.1, alpha=0.99, maxiter=100, positivity=True):
     """
     ADMM framework to minimize a prox-capable objective over the matrix of kernel norms.
     """
 
+    d = cumul.dim
+
+    if X1_0 is None:
+        X1_0 = np.zeros((d,d))
+    if X4_0 is None:
+        X4_0 = np.eye(d)
     # compute diagA, diagD, O, B and C
     diagA = np.sqrt(cumul.L)
     diagD, O = eigh(cumul.C)
