@@ -1,5 +1,4 @@
 from numpy.linalg import eigh
-
 from whma.updates import *
 
 #@autojit
