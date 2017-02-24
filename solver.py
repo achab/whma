@@ -15,8 +15,10 @@ def admm(cumul, prox_fun, X1_0=None, X4_0=None, rho=0.1, alpha=0.99, maxiter=100
     if X4_0 is None:
         X4_0 = np.eye(d)
     # compute diagA, diagD, O, B and C
-    diagA = np.sqrt(cumul.L)
-    diagD, O = eigh(cumul.C)
+    L_mean = np.mean(cumul.L, axis=0)
+    C_mean = np.mean(cumul.C, axis=0)
+    diagA = np.sqrt(L_mean)
+    diagD, O = eigh(C_mean)
     sqrt_diagD = np.sqrt(diagD)
     B = np.dot(O,np.dot(np.diag(sqrt_diagD),O.T))
     C = np.diag(1. / diagA)
