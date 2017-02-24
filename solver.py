@@ -1,5 +1,6 @@
 from numpy.linalg import eigh
 from whma.updates import *
+import numpy as np
 
 #@autojit
 def admm(cumul, prox_fun, X1_0=None, X4_0=None, rho=0.1, alpha=0.99, maxiter=100, positivity=True):
