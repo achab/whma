@@ -57,7 +57,7 @@ class Cumulants(object):
         elif filtr == "gaussian":
             A_ij = A_ij_gauss
         else:
-            raise ValueError("In `compute_C_and_J`: `filtr` should either equal `rectangular` or `gaussian`.")
+            raise ValueError("In `compute_C`: `filtr` should either equal `rectangular` or `gaussian`.")
 
         if method == 'parallel_by_day':
             l = Parallel(-1)(delayed(worker_day_C)(A_ij, realization, h_w, T, L, sigma, d) for (realization, T, L) in zip(self.realizations, self.time, self.L))
@@ -109,7 +109,7 @@ class Cumulants(object):
         self.compute_L()
         print("L is computed")
         if filtr == "gaussian" and sigma == 0.: sigma = half_width/5.
-        self.compute_C_and_J(half_width=half_width, method=method, filtr=filtr, sigma=sigma)
+        self.compute_C(half_width=half_width, method=method, filtr=filtr, sigma=sigma)
         print("C is computed")
         if self.R_true is not None and self.mu_true is not None:
             self.set_L_th()
