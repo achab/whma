@@ -59,4 +59,4 @@ def admm(cumul, prox_fun, X1_0=None, X4_0=None, rho=0.1, alpha=0.99, maxiter=100
 #    print("||U4|| = ", np.linalg.norm(U4))
 #    print("||U5|| = ", np.linalg.norm(U5))
 
-    return X1
+    return X1.T
