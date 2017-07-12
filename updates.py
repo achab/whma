@@ -1,4 +1,4 @@
-from whma.prox import nonnegativity, stability, orthogonality
+from whma.prox import nonnegativity, stability, orthogonality, proj_unit_ball
 from numba import autojit
 import numpy as np
 
@@ -19,7 +19,7 @@ def update_X3(X2, U3, alpha=0.99):
 
 @autojit
 def update_X4(Y2, U5, B):
-    return orthogonality(np.dot(Y2,B) + U5)
+    return proj_unit_ball(np.dot(Y2,B) + U5)
 
 @autojit
 def update_Y1(X1, Y2, U1, U4, diagA, C):
