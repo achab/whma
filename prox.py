@@ -21,6 +21,14 @@ def orthogonality(X, relaxed=True):
         U, _, V = np.linalg.svd(X)
         return np.dot(U,V)
 
+@autojit
+def proj_unit_ball(X):
+    norm = np.linalg.norm(X)
+    if norm > 1:
+        return X / norm
+    else:
+        return X
+
 def prox_zero(X, lbd=1.):
     return X
 
